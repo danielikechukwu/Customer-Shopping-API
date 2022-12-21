@@ -14,9 +14,9 @@ namespace ConstumerShoppingAPI.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly ShopDbContext _context;
 
-        public ProductsController(AppDbContext context)
+        public ProductsController(ShopDbContext context)
         {
             _context = context;
         }
@@ -25,14 +25,14 @@ namespace ConstumerShoppingAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> Getproduces()
         {
-            return await _context.produces.ToListAsync();
+            return await _context.products.ToListAsync();
         }
 
         // GET: api/Products/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
-            var product = await _context.produces.FindAsync(id);
+            var product = await _context.products.FindAsync(id);
 
             if (product == null)
             {
@@ -78,7 +78,7 @@ namespace ConstumerShoppingAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Product>> PostProduct(Product product)
         {
-            _context.produces.Add(product);
+            _context.products.Add(product);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetProduct", new { id = product.Id }, product);
@@ -88,13 +88,13 @@ namespace ConstumerShoppingAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
-            var product = await _context.produces.FindAsync(id);
+            var product = await _context.products.FindAsync(id);
             if (product == null)
             {
                 return NotFound();
             }
 
-            _context.produces.Remove(product);
+            _context.products.Remove(product);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -102,7 +102,7 @@ namespace ConstumerShoppingAPI.Controllers
 
         private bool ProductExists(int id)
         {
-            return _context.produces.Any(e => e.Id == id);
+            return _context.products.Any(e => e.Id == id);
         }
     }
 }

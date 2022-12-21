@@ -14,9 +14,9 @@ namespace ConstumerShoppingAPI.Controllers
     [ApiController]
     public class CustomersController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly ShopDbContext _context;
 
-        public CustomersController(AppDbContext context)
+        public CustomersController(ShopDbContext context)
         {
             _context = context;
         }
@@ -82,6 +82,7 @@ namespace ConstumerShoppingAPI.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetCustomer", new { id = customer.Id }, customer);
+
         }
 
         // DELETE: api/Customers/5

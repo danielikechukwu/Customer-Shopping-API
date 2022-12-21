@@ -11,9 +11,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ConstumerShoppingAPI.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
-    [Migration("20221219053100_CPMigration")]
-    partial class CPMigration
+    [DbContext(typeof(ShopDbContext))]
+    [Migration("20221221131454_CustomerProduct")]
+    partial class CustomerProduct
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,25 +27,22 @@ namespace ConstumerShoppingAPI.Migrations
 
             modelBuilder.Entity("ConstumerShoppingAPI.Model.Customer", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
 
-                    b.Property<DateTime>("DateOfBirth")
+                    b.Property<DateTime?>("DateOfBirth")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Gender")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("HomeAddress")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -55,41 +52,39 @@ namespace ConstumerShoppingAPI.Migrations
 
             modelBuilder.Entity("ConstumerShoppingAPI.Model.Customer_Product", b =>
                 {
-                    b.Property<int>("ProductId")
+                    b.Property<int?>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CustomerId")
+                    b.Property<int?>("CustomerId")
                         .HasColumnType("int");
 
                     b.HasKey("ProductId", "CustomerId");
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Customer_Product");
+                    b.ToTable("customerproducts");
                 });
 
             modelBuilder.Entity("ConstumerShoppingAPI.Model.Product", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
 
                     b.Property<string>("ImageURL")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Price")
+                    b.Property<double?>("Price")
                         .HasColumnType("float");
 
                     b.HasKey("Id");
 
-                    b.ToTable("produces");
+                    b.ToTable("products");
                 });
 
             modelBuilder.Entity("ConstumerShoppingAPI.Model.Customer_Product", b =>

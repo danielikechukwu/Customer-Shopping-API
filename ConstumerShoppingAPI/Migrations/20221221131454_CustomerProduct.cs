@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ConstumerShoppingAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class CPMigration : Migration
+    public partial class CustomerProduct : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,10 +17,10 @@ namespace ConstumerShoppingAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    HomeAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HomeAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -28,22 +28,22 @@ namespace ConstumerShoppingAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "produces",
+                name: "products",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ImageURL = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<double>(type: "float", nullable: false)
+                    ImageURL = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<double>(type: "float", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_produces", x => x.Id);
+                    table.PrimaryKey("PK_products", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Customer_Product",
+                name: "customerproducts",
                 columns: table => new
                 {
                     ProductId = table.Column<int>(type: "int", nullable: false),
@@ -51,24 +51,24 @@ namespace ConstumerShoppingAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Customer_Product", x => new { x.ProductId, x.CustomerId });
+                    table.PrimaryKey("PK_customerproducts", x => new { x.ProductId, x.CustomerId });
                     table.ForeignKey(
-                        name: "FK_Customer_Product_customers_CustomerId",
+                        name: "FK_customerproducts_customers_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "customers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Customer_Product_produces_ProductId",
+                        name: "FK_customerproducts_products_ProductId",
                         column: x => x.ProductId,
-                        principalTable: "produces",
+                        principalTable: "products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Customer_Product_CustomerId",
-                table: "Customer_Product",
+                name: "IX_customerproducts_CustomerId",
+                table: "customerproducts",
                 column: "CustomerId");
         }
 
@@ -76,13 +76,13 @@ namespace ConstumerShoppingAPI.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Customer_Product");
+                name: "customerproducts");
 
             migrationBuilder.DropTable(
                 name: "customers");
 
             migrationBuilder.DropTable(
-                name: "produces");
+                name: "products");
         }
     }
 }
