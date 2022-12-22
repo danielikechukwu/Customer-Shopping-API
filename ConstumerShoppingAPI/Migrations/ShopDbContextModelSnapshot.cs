@@ -44,7 +44,7 @@ namespace ConstumerShoppingAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("customers");
+                    b.ToTable("customers", (string)null);
                 });
 
             modelBuilder.Entity("ConstumerShoppingAPI.Model.Customer_Product", b =>
@@ -59,7 +59,7 @@ namespace ConstumerShoppingAPI.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("customerproducts");
+                    b.ToTable("customerproducts", (string)null);
                 });
 
             modelBuilder.Entity("ConstumerShoppingAPI.Model.Product", b =>
@@ -81,7 +81,7 @@ namespace ConstumerShoppingAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("products");
+                    b.ToTable("products", (string)null);
                 });
 
             modelBuilder.Entity("ConstumerShoppingAPI.Model.Customer_Product", b =>
