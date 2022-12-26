@@ -1,0 +1,35 @@
+﻿@model ConstumerShoppingMVC.Models.ProductViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Add Product";
+}
+
+<div class="col-lg-6 border-primary" style="margin: 0 auto;">
+
+    <form method="post" asp-action="AddProduct" asp-controller="Store" class="mt-2">
+
+        <div class="mb-3">
+            <label for="" class="form-label">Image Link</label>
+            <input class="form-control" asp-for="ImageURL">
+        </div>
+
+        <div class="mb-3">
+            <label for="" class="form-label">@Html.DisplayNameFor(model => model.Name)</label>
+            <input class="form-control" asp-for="Name">
+        </div>
+
+        <div class="mb-3">
+            <label for="" class="form-label">@Html.DisplayNameFor(model => model.Price)</label>
+            <input type="text" class="form-control" asp-for="Price">
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Add Product</button>
+
+        <button class="btn btn-warning" style="display: flex; float: right;" asp-action="Close"> Close </button>
+
+    </form>
+
+</div>

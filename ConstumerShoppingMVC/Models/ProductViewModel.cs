@@ -6,11 +6,14 @@ namespace ConstumerShoppingMVC.Models
     {
         [Display(Name="ID")]
         public int Id { get; set; }
+
         [Display(Name = "Picture Image")]
-        public string ImageURL { get; set; }
+        public string? ImageURL { get; set; }
+
         [Display(Name = "Picture Name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
+
         [Display(Name = "Picture Price")]
-        public double Price { get; set; }
+        public double? Price { get; set; }
     }
 }
