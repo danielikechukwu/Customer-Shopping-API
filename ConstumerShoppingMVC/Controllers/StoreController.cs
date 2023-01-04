@@ -47,11 +47,9 @@ namespace ConstumerShoppingMVC.Controllers
         //api/Product/{Id}
         //Viewing Individual Product by Id.
         public async Task<IActionResult> ViewProduct(int Id)
-        {
-            
+        {           
 
                 ProductViewModel Model = new ProductViewModel();
-
 
                 HttpResponseMessage response = await client.GetAsync(client.BaseAddress + "api/Products/" + Id);
 
@@ -71,7 +69,6 @@ namespace ConstumerShoppingMVC.Controllers
         public async Task<IActionResult> EditProduct(int Id)
         {
             ProductViewModel Models = new ProductViewModel();
-
 
             HttpResponseMessage response = await client.GetAsync(client.BaseAddress + "api/Products/" + Id);
 
